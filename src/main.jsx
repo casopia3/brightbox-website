@@ -1,24 +1,25 @@
-import React, { useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import {
-  ArrowRight,
-  ChevronDown,
-  ChevronLeft,
-  ChevronRight,
-  Clock,
-  Mail,
-  MapPin,
+  ArrowUpRight,
   Menu,
-  Phone,
-  Quote,
   X,
+  ChevronRight,
+  Sofa,
+  RefreshCw,
+  ClipboardList,
+  Sparkles,
+  Leaf,
+  Users,
+  Mail,
+  Phone,
 } from 'lucide-react';
 import './styles.css';
 
 /* =========================================================
-   REAL PROJECT IMAGES
-   21 images used by the project portfolio
-   ========================================================= */
+   BRIGHT BOX — REAL PROJECT IMAGES
+   All 32 image files currently available in /public/images
+========================================================= */
 
 const imageFiles = [
   'project-009.jpg',
@@ -42,11 +43,22 @@ const imageFiles = [
   'project-069.jpg',
   'project-073.jpg',
   'project-076.jpg',
+  'project-079.jpg',
+  'project-081.jpg',
+  'project-085.jpg',
+  'project-088.jpg',
+  'project-091.jpg',
+  'project-094.jpg',
+  'project-097.jpg',
+  'project-099.jpg',
+  'project-102.jpg',
+  'project-104.jpg',
+  'project-109.jpg',
 ];
 
 /* =========================================================
    PROJECT DATA
-   ========================================================= */
+========================================================= */
 
 const projectData = [
   {
@@ -217,311 +229,379 @@ const projectData = [
     service: 'Design + Supervision',
     image: imageFiles[20],
   },
+
+  /* =======================================================
+     ADDITIONAL REAL IMAGES
+     These files exist in the project but did not previously
+     have project records.
+  ======================================================= */
+
+  {
+    category: 'Portfolio',
+    title: 'Bright BOX Project 22',
+    location: 'Addis Ababa',
+    year: '2024',
+    service: 'Interior Design',
+    image: imageFiles[21],
+  },
+  {
+    category: 'Portfolio',
+    title: 'Bright BOX Project 23',
+    location: 'Addis Ababa',
+    year: '2024',
+    service: 'Interior Design',
+    image: imageFiles[22],
+  },
+  {
+    category: 'Portfolio',
+    title: 'Bright BOX Project 24',
+    location: 'Addis Ababa',
+    year: '2024',
+    service: 'Interior Design',
+    image: imageFiles[23],
+  },
+  {
+    category: 'Portfolio',
+    title: 'Bright BOX Project 25',
+    location: 'Addis Ababa',
+    year: '2024',
+    service: 'Interior Design',
+    image: imageFiles[24],
+  },
+  {
+    category: 'Portfolio',
+    title: 'Bright BOX Project 26',
+    location: 'Addis Ababa',
+    year: '2024',
+    service: 'Interior Design',
+    image: imageFiles[25],
+  },
+  {
+    category: 'Landscape',
+    title: 'Sports Field Project',
+    location: 'Addis Ababa',
+    year: '2024',
+    service: 'Landscape + Construction',
+    image: imageFiles[26],
+  },
+  {
+    category: 'Portfolio',
+    title: 'Bright BOX Project 28',
+    location: 'Addis Ababa',
+    year: '2024',
+    service: 'Interior Design',
+    image: imageFiles[27],
+  },
+  {
+    category: 'Portfolio',
+    title: 'Bright BOX Project 29',
+    location: 'Addis Ababa',
+    year: '2024',
+    service: 'Interior Design',
+    image: imageFiles[28],
+  },
+  {
+    category: 'Landscape',
+    title: 'Landscape Development Project',
+    location: 'Addis Ababa',
+    year: '2024',
+    service: 'Landscape + Construction',
+    image: imageFiles[29],
+  },
+  {
+    category: 'Landscape',
+    title: 'Sports Ground Project',
+    location: 'Addis Ababa',
+    year: '2024',
+    service: 'Landscape + Construction',
+    image: imageFiles[30],
+  },
+  {
+    category: 'Portfolio',
+    title: 'Bright BOX Project 32',
+    location: 'Addis Ababa',
+    year: '2024',
+    service: 'Interior Design',
+    image: imageFiles[31],
+  },
 ];
 
 /* =========================================================
    SERVICES
-   ========================================================= */
+========================================================= */
 
 const services = [
   {
-    number: '01',
-    title: 'Interior Design',
-    description:
-      'Thoughtful interior environments that combine functionality, comfort, identity, and refined aesthetics.',
+    icon: Sparkles,
+    title: 'Interior Design & Construction',
+    text: 'Functional and aesthetic custom space design for residential and commercial program spaces.',
   },
   {
-    number: '02',
-    title: 'Architecture',
-    description:
-      'Complete architectural design solutions developed around the character, purpose, and context of each project.',
+    icon: Sofa,
+    title: 'Woodwork & Furniture',
+    text: 'Furniture and woodwork crafted through the company workshop to fit each space and style requirement.',
   },
   {
-    number: '03',
-    title: 'Construction',
-    description:
-      'Professional construction execution with attention to quality, materials, workmanship, and project coordination.',
+    icon: RefreshCw,
+    title: 'Renovation',
+    text: 'Redesigning and upgrading existing spaces while maintaining structural integrity.',
   },
   {
-    number: '04',
-    title: 'Landscape Design',
-    description:
-      'Outdoor environments designed to connect architecture with nature and create practical, welcoming spaces.',
+    icon: ClipboardList,
+    title: 'Project Management',
+    text: 'Overseeing design projects from start to finish, coordinating contractors, suppliers and artisans.',
   },
 ];
 
 /* =========================================================
-   STATS
-   ========================================================= */
+   VALUES
+========================================================= */
 
-const stats = [
-  {
-    number: '10+',
-    label: 'Years of Experience',
-  },
-  {
-    number: '50+',
-    label: 'Completed Projects',
-  },
-  {
-    number: '30+',
-    label: 'Satisfied Clients',
-  },
-  {
-    number: '4',
-    label: 'Core Services',
-  },
-];
-
-/* =========================================================
-   TESTIMONIALS
-   ========================================================= */
-
-const testimonials = [
-  {
-    quote:
-      'Bright BOX transformed our vision into a space that feels both functional and beautiful. Their attention to detail made a real difference.',
-    name: 'Client',
-    role: 'Private Client',
-  },
-  {
-    quote:
-      'The team was professional throughout the project and delivered a result that exceeded our expectations.',
-    name: 'Client',
-    role: 'Commercial Client',
-  },
-  {
-    quote:
-      'From the initial concept to construction, the process was handled with care, communication, and professionalism.',
-    name: 'Client',
-    role: 'Residential Client',
-  },
-];
-
-/* =========================================================
-   NAVIGATION
-   ========================================================= */
-
-const navItems = [
-  { label: 'Home', href: '#home' },
-  { label: 'About', href: '#about' },
-  { label: 'Services', href: '#services' },
-  { label: 'Projects', href: '#projects' },
-  { label: 'Contact', href: '#contact' },
+const values = [
+  [
+    '01',
+    'Creativity & Innovation',
+    Sparkles,
+    'Pushing boundaries through original ideas, trends and technologies.',
+  ],
+  [
+    '02',
+    'Sustainability',
+    Leaf,
+    'Designing with the future in mind through responsible design practices.',
+  ],
+  [
+    '03',
+    'Collaboration',
+    Users,
+    'Working closely with clients, partners and the creative team.',
+  ],
 ];
 
 /* =========================================================
    APP
-   ========================================================= */
+========================================================= */
 
 function App() {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [activeCategory, setActiveCategory] = useState('All');
-  const [selectedProject, setSelectedProject] = useState(null);
-  const [testimonialIndex, setTestimonialIndex] = useState(0);
+  const [open, setOpen] = useState(false);
+  const [filter, setFilter] = useState('All');
+  const [selected, setSelected] = useState(null);
+  const [scrolled, setScrolled] = useState(false);
 
-  const categories = [
-    'All',
-    ...new Set(projectData.map((project) => project.category)),
-  ];
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 30);
+    };
 
-  const filteredProjects =
-    activeCategory === 'All'
-      ? projectData
-      : projectData.filter(
-          (project) => project.category === activeCategory
-        );
+    window.addEventListener('scroll', handleScroll);
 
-  const nextTestimonial = () => {
-    setTestimonialIndex(
-      (current) => (current + 1) % testimonials.length
-    );
-  };
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
-  const previousTestimonial = () => {
-    setTestimonialIndex(
-      (current) =>
-        (current - 1 + testimonials.length) % testimonials.length
-    );
-  };
+  const filtered = useMemo(() => {
+    if (filter === 'All') {
+      return projectData;
+    }
 
-  const closeMobileMenu = () => {
-    setMenuOpen(false);
+    return projectData.filter((project) => project.category === filter);
+  }, [filter]);
+
+  const cats = ['All', ...new Set(projectData.map((project) => project.category))];
+
+  const go = (id) => {
+    document.getElementById(id)?.scrollIntoView({
+      behavior: 'smooth',
+    });
+
+    setOpen(false);
   };
 
   return (
-    <div className="site">
-
+    <>
       {/* =====================================================
-          HEADER
-          ===================================================== */}
+          NAVIGATION
+      ===================================================== */}
 
-      <header className="header">
-        <div className="container header-inner">
+      <header className={scrolled ? 'nav scrolled' : 'nav'}>
+        <div className="navin">
+          <button className="brand" onClick={() => go('home')}>
+            <span className="brandmark">B</span>
 
-          <a href="#home" className="logo" onClick={closeMobileMenu}>
-            <span className="logo-mark">B</span>
-            <span className="logo-text">
-              <strong>BRIGHT</strong>
-              <span>BOX</span>
+            <span>
+              BRIGHT
+              <br />
+              <small>BOX</small>
             </span>
-          </a>
+          </button>
 
-          <nav className={`nav ${menuOpen ? 'nav-open' : ''}`}>
-            {navItems.map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                onClick={closeMobileMenu}
-              >
-                {item.label}
-              </a>
-            ))}
-
-            <a
-              href="#contact"
-              className="nav-cta"
-              onClick={closeMobileMenu}
-            >
-              Start a Project
-              <ArrowRight size={16} />
-            </a>
+          <nav>
+            {['About', 'Services', 'Projects', 'Values', 'Contact'].map(
+              (item) => (
+                <button
+                  key={item}
+                  onClick={() => go(item.toLowerCase())}
+                >
+                  {item}
+                </button>
+              )
+            )}
           </nav>
 
           <button
-            className="mobile-menu-button"
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Toggle navigation"
+            className="navcta"
+            onClick={() => go('contact')}
           >
-            {menuOpen ? <X size={24} /> : <Menu size={24} />}
+            Start a project
+            <ArrowUpRight size={16} />
           </button>
 
+          <button
+            className="menub"
+            onClick={() => setOpen(!open)}
+            aria-label="Open menu"
+          >
+            {open ? <X /> : <Menu />}
+          </button>
         </div>
+
+        {open && (
+          <div className="mobilemenu">
+            {['About', 'Services', 'Projects', 'Values', 'Contact'].map(
+              (item) => (
+                <button
+                  key={item}
+                  onClick={() => go(item.toLowerCase())}
+                >
+                  {item}
+                </button>
+              )
+            )}
+
+            <button
+              className="mobilecta"
+              onClick={() => go('contact')}
+            >
+              Start a project
+              <ArrowUpRight size={16} />
+            </button>
+          </div>
+        )}
       </header>
 
-      {/* =====================================================
-          HERO
-          ===================================================== */}
+      <main id="home">
+        {/* ===================================================
+            HERO
+        =================================================== */}
 
-      <main>
-
-        <section className="hero" id="home">
-          <div className="hero-image">
+        <section className="hero">
+          <div className="heroimage">
             <img
               src="/images/project-009.jpg"
               alt="Bright BOX interior design project"
             />
+
+            <div className="grain" />
           </div>
 
-          <div className="hero-overlay"></div>
+          <div className="heroin">
+            <div className="eyebrow">
+              INTERIOR DESIGN · CONSTRUCTION · FURNITURE
+            </div>
 
-          <div className="container hero-content">
-            <div className="hero-copy">
+            <h1>
+              Spaces with
+              <br />
+              <em>character.</em>
+            </h1>
 
-              <p className="eyebrow">
-                ARCHITECTURE • INTERIOR • CONSTRUCTION
-              </p>
+            <p>
+              Transforming spaces into timeless expressions of
+              beauty, functionality and individuality.
+            </p>
 
-              <h1>
-                Spaces that
-                <br />
-                <span>inspire.</span>
-              </h1>
+            <div className="herobtns">
+              <button
+                className="darkbtn"
+                onClick={() => go('projects')}
+              >
+                Explore projects
+                <ArrowUpRight size={17} />
+              </button>
 
-              <p className="hero-description">
-                We design and build distinctive spaces that bring
-                together architecture, interior design, construction,
-                and landscape.
-              </p>
-
-              <div className="hero-actions">
-                <a href="#projects" className="button button-primary">
-                  Explore Our Work
-                  <ArrowRight size={18} />
-                </a>
-
-                <a href="#about" className="button button-outline">
-                  Discover Bright BOX
-                </a>
-              </div>
-
+              <button
+                className="lightbtn"
+                onClick={() => go('contact')}
+              >
+                Start a project
+                <ArrowUpRight size={17} />
+              </button>
             </div>
           </div>
 
-          <div className="hero-scroll">
-            <span>Scroll to explore</span>
-            <ChevronDown size={18} />
+          <div className="herofoot">
+            <span>
+              BRIGHT WOOD MANUFACTURING
+              <br />
+              AND INTERIOR DESIGN PLC
+            </span>
+
+            <span>ADDIS ABABA · ETHIOPIA</span>
           </div>
         </section>
 
         {/* ===================================================
             ABOUT
-            =================================================== */}
+        =================================================== */}
 
-        <section className="about section" id="about">
-          <div className="container">
+        <section className="intro section" id="about">
+          <div className="kicker">01 — ABOUT</div>
 
-            <div className="section-heading">
-              <p className="eyebrow">ABOUT BRIGHT BOX</p>
-
+          <div className="introgrid">
+            <div>
               <h2>
-                Creating spaces with
+                We design spaces
                 <br />
-                <span>purpose and character.</span>
+                <span>that feel like you.</span>
               </h2>
             </div>
 
-            <div className="about-grid">
+            <div>
+              <p className="lead">
+                BRIGHT WOOD MANUFACTURING AND INTERIOR DESIGN PLC
+                specializes in interior design and finishing
+                construction works, from residential to commercial
+                buildings.
+              </p>
 
-              <div className="about-main">
-                <p className="large-text">
-                  Bright BOX is an architecture, interior design,
-                  construction, and landscape company dedicated to
-                  creating meaningful environments.
-                </p>
+              <p>
+                Our approach is built around innovative design,
+                sustainable design and collaboration. Through
+                advanced design techniques, we pursue visually
+                compelling aesthetics together with superior
+                functionality.
+              </p>
 
-                <p>
-                  We believe great spaces are more than beautiful.
-                  They should respond to the people who use them,
-                  the context around them, and the purpose they are
-                  designed to serve.
-                </p>
-
-                <p>
-                  From the first concept through construction and
-                  completion, our team brings together creative
-                  thinking, technical knowledge, and careful
-                  execution.
-                </p>
-
-                <a href="#contact" className="text-link">
-                  Work with us
-                  <ArrowRight size={17} />
-                </a>
-              </div>
-
-              <div className="about-stats">
-                {stats.map((stat) => (
-                  <div className="stat" key={stat.label}>
-                    <strong>{stat.number}</strong>
-                    <span>{stat.label}</span>
-                  </div>
-                ))}
-              </div>
-
+              <button
+                className="textbtn"
+                onClick={() => go('services')}
+              >
+                Discover our capabilities
+                <ChevronRight size={18} />
+              </button>
             </div>
           </div>
         </section>
 
         {/* ===================================================
             SERVICES
-            =================================================== */}
+        =================================================== */}
 
-        <section className="services section section-dark" id="services">
-          <div className="container">
-
-            <div className="section-heading section-heading-light">
-              <p className="eyebrow">WHAT WE DO</p>
+        <section className="services section" id="services">
+          <div className="sectionhead">
+            <div>
+              <div className="kicker">02 — WHAT WE DO</div>
 
               <h2>
                 From concept
@@ -530,466 +610,382 @@ function App() {
               </h2>
             </div>
 
-            <div className="services-grid">
-              {services.map((service) => (
-                <article className="service-card" key={service.number}>
+            <p>
+              One creative partner across design, making,
+              construction and project coordination.
+            </p>
+          </div>
 
-                  <div className="service-number">
-                    {service.number}
-                  </div>
+          <div className="servicegrid">
+            {services.map(({ icon: Icon, title, text }, index) => (
+              <article className="service" key={title}>
+                <div className="serviceicon">
+                  <Icon size={23} />
+                </div>
 
-                  <h3>{service.title}</h3>
+                <div className="servicen">
+                  0{index + 1}
+                </div>
 
-                  <p>{service.description}</p>
+                <h3>{title}</h3>
 
-                  <span className="service-arrow">
-                    <ArrowRight size={20} />
-                  </span>
+                <p>{text}</p>
 
-                </article>
-              ))}
-            </div>
-
+                <button onClick={() => go('contact')}>
+                  Discuss your project
+                  <ArrowUpRight size={16} />
+                </button>
+              </article>
+            ))}
           </div>
         </section>
 
         {/* ===================================================
             PROJECTS
-            =================================================== */}
+        =================================================== */}
 
         <section className="projects section" id="projects">
-          <div className="container">
+          <div className="sectionhead projecthead">
+            <div>
+              <div className="kicker">03 — SELECTED WORK</div>
 
-            <div className="projects-header">
-
-              <div className="section-heading">
-                <p className="eyebrow">SELECTED PROJECTS</p>
-
-                <h2>
-                  Work we're
-                  <br />
-                  <span>proud of.</span>
-                </h2>
-              </div>
-
-              <p className="projects-intro">
-                A selection of architecture, interiors,
-                commercial spaces, residences, and landscape
-                projects completed by Bright BOX.
-              </p>
-
+              <h2>
+                Built with
+                <br />
+                <span>purpose.</span>
+              </h2>
             </div>
 
-            <div className="project-filters">
-              {categories.map((category) => (
-                <button
-                  key={category}
-                  className={
-                    activeCategory === category
-                      ? 'filter-button active'
-                      : 'filter-button'
-                  }
-                  onClick={() => setActiveCategory(category)}
-                >
-                  {category}
-                </button>
-              ))}
-            </div>
+            <p>
+              Actual Bright BOX portfolio work from the company
+              profile.
+            </p>
+          </div>
 
-            <div className="projects-grid">
-              {filteredProjects.map((project, index) => (
-                <article
-                  className="project-card"
-                  key={`${project.title}-${index}`}
-                  onClick={() => setSelectedProject(project)}
-                >
-                  <div className="project-image">
-                    <img
-                      src={`/images/${project.image}`}
-                      alt={project.title}
-                      loading="lazy"
-                    />
+          {/* PROJECT FILTERS */}
 
-                    <div className="project-overlay">
-                      <span>View Project</span>
-                      <ArrowRight size={18} />
-                    </div>
+          <div className="filters">
+            {cats.map((category) => (
+              <button
+                key={category}
+                className={filter === category ? 'active' : ''}
+                onClick={() => setFilter(category)}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
+
+          {/* PROJECT GRID */}
+
+          <div className="projectgrid">
+            {filtered.map((project, index) => (
+              <article
+                className="project"
+                key={`${project.title}-${project.image}`}
+                onClick={() => setSelected(project)}
+              >
+                <div className="pimg">
+                  <img
+                    src={`/images/${project.image}`}
+                    alt={project.title}
+                    loading="lazy"
+                  />
+
+                  <div className="pnum">
+                    {String(index + 1).padStart(2, '0')}
                   </div>
 
-                  <div className="project-info">
-                    <div>
-                      <span className="project-category">
-                        {project.category}
-                      </span>
-
-                      <h3>{project.title}</h3>
-
-                      <p>
-                        {project.location} • {project.year}
-                      </p>
-                    </div>
-
-                    <span className="project-service">
-                      {project.service}
-                    </span>
+                  <div className="hoverarrow">
+                    <ArrowUpRight />
                   </div>
-                </article>
-              ))}
-            </div>
+                </div>
 
+                <div className="pmeta">
+                  <span>{project.category}</span>
+                  <span>{project.year}</span>
+                </div>
+
+                <h3>{project.title}</h3>
+
+                <p>
+                  {project.location} · {project.service}
+                </p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        {/* ===================================================
+            VALUES
+        =================================================== */}
+
+        <section className="values section" id="values">
+          <div className="kicker">04 — PRINCIPLES</div>
+
+          <div className="valuesintro">
+            <h2>
+              Three ideas
+              <br />
+              <span>guide every space.</span>
+            </h2>
+
+            <p>
+              At Bright BOX, originality, responsibility and
+              teamwork are central to the way we design and
+              deliver.
+            </p>
+          </div>
+
+          <div className="valuegrid">
+            {values.map(([number, title, Icon, description]) => (
+              <article className="value" key={title}>
+                <span>{number}</span>
+
+                <Icon size={25} />
+
+                <h3>{title}</h3>
+
+                <p>{description}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        {/* ===================================================
+            MANIFESTO
+        =================================================== */}
+
+        <section className="manifesto">
+          <div className="manifestoin">
+            <span>OUR VISION</span>
+
+            <h2>
+              To inspire and transform space into{' '}
+              <em>timeless expressions</em> of beauty,
+              functionality and individuality.
+            </h2>
           </div>
         </section>
 
         {/* ===================================================
             PROCESS
-            =================================================== */}
+        =================================================== */}
 
-        <section className="process section section-light">
-          <div className="container">
+        <section className="process section">
+          <div className="kicker">05 — THE WAY WE WORK</div>
 
-            <div className="section-heading">
-              <p className="eyebrow">OUR PROCESS</p>
-
+          <div className="processgrid">
+            <div>
               <h2>
-                A clear path from
+                One vision.
                 <br />
-                <span>idea to reality.</span>
+                <span>One process.</span>
               </h2>
+
+              <p>
+                From the first conversation to the finished space,
+                we coordinate the details that make a project work.
+              </p>
             </div>
 
-            <div className="process-grid">
-
-              <div className="process-item">
-                <span>01</span>
-                <h3>Discover</h3>
-                <p>
-                  We understand your goals, needs, context,
-                  budget, and vision.
-                </p>
-              </div>
-
-              <div className="process-item">
-                <span>02</span>
-                <h3>Design</h3>
-                <p>
-                  We develop thoughtful concepts and transform
-                  ideas into practical design solutions.
-                </p>
-              </div>
-
-              <div className="process-item">
-                <span>03</span>
-                <h3>Develop</h3>
-                <p>
-                  We refine the design, coordinate technical
-                  details, and prepare for execution.
-                </p>
-              </div>
-
-              <div className="process-item">
-                <span>04</span>
-                <h3>Deliver</h3>
-                <p>
-                  We oversee implementation and work toward
-                  delivering the finished space to a high standard.
-                </p>
-              </div>
-
-            </div>
-
-          </div>
-        </section>
-
-        {/* ===================================================
-            TESTIMONIAL
-            =================================================== */}
-
-        <section className="testimonial section">
-          <div className="container">
-
-            <div className="testimonial-inner">
-
-              <Quote className="quote-icon" size={48} />
-
-              <div className="testimonial-content">
-                <p className="testimonial-quote">
-                  “{testimonials[testimonialIndex].quote}”
-                </p>
-
-                <div className="testimonial-author">
-                  <strong>
-                    {testimonials[testimonialIndex].name}
-                  </strong>
-
+            <div className="steps">
+              {[
+                'Understand',
+                'Design',
+                'Coordinate',
+                'Build',
+                'Deliver',
+              ].map((step, index) => (
+                <div className="step" key={step}>
                   <span>
-                    {testimonials[testimonialIndex].role}
+                    0{index + 1}
                   </span>
+
+                  <strong>{step}</strong>
+
+                  <ChevronRight size={18} />
                 </div>
-              </div>
-
-              <div className="testimonial-controls">
-
-                <button
-                  onClick={previousTestimonial}
-                  aria-label="Previous testimonial"
-                >
-                  <ChevronLeft size={20} />
-                </button>
-
-                <span>
-                  {String(testimonialIndex + 1).padStart(2, '0')} /{' '}
-                  {String(testimonials.length).padStart(2, '0')}
-                </span>
-
-                <button
-                  onClick={nextTestimonial}
-                  aria-label="Next testimonial"
-                >
-                  <ChevronRight size={20} />
-                </button>
-
-              </div>
-
+              ))}
             </div>
-
           </div>
         </section>
 
         {/* ===================================================
             CONTACT
-            =================================================== */}
+            IMPORTANT:
+            project-096.jpg did NOT exist.
+            Use a real image instead.
+        =================================================== */}
 
-        <section className="contact section" id="contact">
-          <div className="contact-image">
+        <section className="contact" id="contact">
+          <div className="contactbg">
             <img
               src="/images/project-094.jpg"
-              alt="Bright BOX project"
+              alt=""
             />
           </div>
 
-          <div className="contact-overlay"></div>
+          <div className="contactin">
+            <div className="kicker light">
+              06 — CONTACT
+            </div>
 
-          <div className="container contact-content">
+            <h2>
+              Have a space
+              <br />
+              <em>in mind?</em>
+            </h2>
 
-            <div className="contact-copy">
-              <p className="eyebrow">LET'S WORK TOGETHER</p>
+            <p>
+              Let's talk about your next interior, construction,
+              furniture or renovation project.
+            </p>
 
-              <h2>
-                Have a project
-                <br />
-                <span>in mind?</span>
-              </h2>
+            <div className="contactrow">
+              <a href="mailto:info@brightbox.et">
+                <Mail />
 
-              <p>
-                Tell us about your project and let's create
-                something meaningful together.
-              </p>
+                <span>
+                  Email us
+                  <br />
+                  <b>Start a conversation</b>
+                </span>
+              </a>
 
-              <a
-                href="mailto:info@brightbox.com"
-                className="button button-light"
-              >
-                Start a Conversation
-                <ArrowRight size={18} />
+              {/* Replace this placeholder number with the real
+                  Bright BOX phone number before deployment. */}
+
+              <a href="tel:+251000000000">
+                <Phone />
+
+                <span>
+                  Call us
+                  <br />
+                  <b>Request a consultation</b>
+                </span>
               </a>
             </div>
-
-            <div className="contact-details">
-
-              <div className="contact-detail">
-                <MapPin size={20} />
-                <div>
-                  <span>Visit Us</span>
-                  <p>Addis Ababa, Ethiopia</p>
-                </div>
-              </div>
-
-              <div className="contact-detail">
-                <Phone size={20} />
-                <div>
-                  <span>Call Us</span>
-                  <p>+251 911 000 000</p>
-                </div>
-              </div>
-
-              <div className="contact-detail">
-                <Mail size={20} />
-                <div>
-                  <span>Email Us</span>
-                  <p>info@brightbox.com</p>
-                </div>
-              </div>
-
-              <div className="contact-detail">
-                <Clock size={20} />
-                <div>
-                  <span>Working Hours</span>
-                  <p>Monday – Friday, 8:30 – 17:30</p>
-                </div>
-              </div>
-
-            </div>
-
           </div>
         </section>
-
       </main>
 
       {/* =====================================================
           FOOTER
-          ===================================================== */}
+      ===================================================== */}
 
-      <footer className="footer">
-        <div className="container">
+      <footer>
+        <div className="footergrid">
+          <div>
+            <button
+              className="brand footerbrand"
+              onClick={() => go('home')}
+            >
+              <span className="brandmark">B</span>
 
-          <div className="footer-top">
-
-            <div className="footer-brand">
-              <a href="#home" className="logo">
-                <span className="logo-mark">B</span>
-
-                <span className="logo-text">
-                  <strong>BRIGHT</strong>
-                  <span>BOX</span>
-                </span>
-              </a>
-
-              <p>
-                Architecture, interior design, construction,
-                and landscape solutions for meaningful spaces.
-              </p>
-            </div>
-
-            <div className="footer-links">
-              <div>
-                <h4>Explore</h4>
-
-                <a href="#about">About</a>
-                <a href="#services">Services</a>
-                <a href="#projects">Projects</a>
-                <a href="#contact">Contact</a>
-              </div>
-
-              <div>
-                <h4>Services</h4>
-
-                <a href="#services">Interior Design</a>
-                <a href="#services">Architecture</a>
-                <a href="#services">Construction</a>
-                <a href="#services">Landscape Design</a>
-              </div>
-            </div>
-
-            <div className="footer-social">
-              <h4>Follow Us</h4>
-
-         <div className="social-links">
-  <a href="#" aria-label="Facebook">
-    f
-  </a>
-
-  <a href="#" aria-label="Instagram">
-    ig
-  </a>
-
-  <a href="#" aria-label="LinkedIn">
-    in
-  </a>
-</div>
-            </div>
-
-          </div>
-
-          <div className="footer-bottom">
-            <p>
-              © {new Date().getFullYear()} Bright BOX. All rights
-              reserved.
-            </p>
+              <span>
+                BRIGHT
+                <br />
+                <small>BOX</small>
+              </span>
+            </button>
 
             <p>
-              Bright Wood Manufacturing and Interior Design PLC
+              Bright Wood Manufacturing and Interior Design PLC.
             </p>
           </div>
 
+          <div>
+            <b>Explore</b>
+
+            <button onClick={() => go('about')}>
+              About
+            </button>
+
+            <button onClick={() => go('services')}>
+              Services
+            </button>
+
+            <button onClick={() => go('projects')}>
+              Projects
+            </button>
+          </div>
+
+          <div>
+            <b>Connect</b>
+
+            <span>Addis Ababa, Ethiopia</span>
+            <span>Interior design · Construction</span>
+            <span>Woodwork · Furniture</span>
+          </div>
+        </div>
+
+        <div className="copyright">
+          <span>
+            © {new Date().getFullYear()} Bright BOX. All rights
+            reserved.
+          </span>
+
+          <span>
+            Crafted for spaces with character.
+          </span>
         </div>
       </footer>
 
       {/* =====================================================
           PROJECT MODAL
-          ===================================================== */}
+      ===================================================== */}
 
-      {selectedProject && (
+      {selected && (
         <div
-          className="project-modal"
-          onClick={() => setSelectedProject(null)}
+          className="modal"
+          onClick={() => setSelected(null)}
         >
           <div
-            className="project-modal-content"
+            className="modalin"
             onClick={(event) => event.stopPropagation()}
           >
-
             <button
-              className="modal-close"
-              onClick={() => setSelectedProject(null)}
+              className="close"
+              onClick={() => setSelected(null)}
               aria-label="Close project"
             >
-              <X size={24} />
+              <X />
             </button>
 
-            <div className="modal-image">
-              <img
-                src={`/images/${selectedProject.image}`}
-                alt={selectedProject.title}
-              />
-            </div>
+            <img
+              src={`/images/${selected.image}`}
+              alt={selected.title}
+            />
 
-            <div className="modal-info">
-
-              <span className="project-category">
-                {selectedProject.category}
+            <div className="modaltext">
+              <span>
+                {selected.category} · {selected.year}
               </span>
 
-              <h2>{selectedProject.title}</h2>
+              <h2>{selected.title}</h2>
 
-              <div className="modal-meta">
-
+              <div className="details">
                 <div>
-                  <span>Location</span>
-                  <strong>{selectedProject.location}</strong>
+                  <small>LOCATION</small>
+                  <b>{selected.location}</b>
                 </div>
 
                 <div>
-                  <span>Year</span>
-                  <strong>{selectedProject.year}</strong>
+                  <small>SERVICE</small>
+                  <b>{selected.service}</b>
                 </div>
-
-                <div>
-                  <span>Service</span>
-                  <strong>{selectedProject.service}</strong>
-                </div>
-
               </div>
-
             </div>
-
           </div>
         </div>
       )}
-
-    </div>
+    </>
   );
 }
 
-/* =========================================================
-   RENDER
-   ========================================================= */
-
-const rootElement = document.getElementById('root');
-
-if (rootElement) {
-  createRoot(rootElement).render(
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
-  );
-}
+createRoot(
+  document.getElementById('root')
+).render(
+  <App />
+);
