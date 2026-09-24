@@ -2,19 +2,14 @@ import React, { useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import {
   ArrowRight,
-  Check,
   ChevronDown,
   ChevronLeft,
   ChevronRight,
   Clock,
-  Facebook,
-  Instagram,
-  Linkedin,
   Mail,
   MapPin,
   Menu,
   Phone,
-  Play,
   Quote,
   X,
 } from 'lucide-react';
@@ -888,19 +883,19 @@ function App() {
             <div className="footer-social">
               <h4>Follow Us</h4>
 
-              <div className="social-links">
-                <a href="#" aria-label="Facebook">
-                  <Facebook size={19} />
-                </a>
+         <div className="social-links">
+  <a href="#" aria-label="Facebook">
+    f
+  </a>
 
-                <a href="#" aria-label="Instagram">
-                  <Instagram size={19} />
-                </a>
+  <a href="#" aria-label="Instagram">
+    ig
+  </a>
 
-                <a href="#" aria-label="LinkedIn">
-                  <Linkedin size={19} />
-                </a>
-              </div>
+  <a href="#" aria-label="LinkedIn">
+    in
+  </a>
+</div>
             </div>
 
           </div>
