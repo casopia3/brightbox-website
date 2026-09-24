@@ -21,6 +21,11 @@ import './styles.css';
    All 32 image files currently available in /public/images
 ========================================================= */
 
+/* =========================================================
+   BRIGHT BOX — REAL PROJECT IMAGES
+   21 project images
+========================================================= */
+
 const imageFiles = [
   'project-009.jpg',
   'project-012.jpg',
@@ -43,22 +48,12 @@ const imageFiles = [
   'project-069.jpg',
   'project-073.jpg',
   'project-076.jpg',
-  'project-079.jpg',
-  'project-081.jpg',
-  'project-085.jpg',
-  'project-088.jpg',
-  'project-091.jpg',
-  'project-094.jpg',
-  'project-097.jpg',
-  'project-099.jpg',
-  'project-102.jpg',
-  'project-104.jpg',
-  'project-109.jpg',
 ];
 
 /* =========================================================
    PROJECT DATA
 ========================================================= */
+
 
 const projectData = [
   {
@@ -228,101 +223,6 @@ const projectData = [
     year: '2021',
     service: 'Design + Supervision',
     image: imageFiles[20],
-  },
-
-  /* =======================================================
-     ADDITIONAL REAL IMAGES
-     These files exist in the project but did not previously
-     have project records.
-  ======================================================= */
-
-  {
-    category: 'Portfolio',
-    title: 'Bright BOX Project 22',
-    location: 'Addis Ababa',
-    year: '2024',
-    service: 'Interior Design',
-    image: imageFiles[21],
-  },
-  {
-    category: 'Portfolio',
-    title: 'Bright BOX Project 23',
-    location: 'Addis Ababa',
-    year: '2024',
-    service: 'Interior Design',
-    image: imageFiles[22],
-  },
-  {
-    category: 'Portfolio',
-    title: 'Bright BOX Project 24',
-    location: 'Addis Ababa',
-    year: '2024',
-    service: 'Interior Design',
-    image: imageFiles[23],
-  },
-  {
-    category: 'Portfolio',
-    title: 'Bright BOX Project 25',
-    location: 'Addis Ababa',
-    year: '2024',
-    service: 'Interior Design',
-    image: imageFiles[24],
-  },
-  {
-    category: 'Portfolio',
-    title: 'Bright BOX Project 26',
-    location: 'Addis Ababa',
-    year: '2024',
-    service: 'Interior Design',
-    image: imageFiles[25],
-  },
-  {
-    category: 'Landscape',
-    title: 'Sports Field Project',
-    location: 'Addis Ababa',
-    year: '2024',
-    service: 'Landscape + Construction',
-    image: imageFiles[26],
-  },
-  {
-    category: 'Portfolio',
-    title: 'Bright BOX Project 28',
-    location: 'Addis Ababa',
-    year: '2024',
-    service: 'Interior Design',
-    image: imageFiles[27],
-  },
-  {
-    category: 'Portfolio',
-    title: 'Bright BOX Project 29',
-    location: 'Addis Ababa',
-    year: '2024',
-    service: 'Interior Design',
-    image: imageFiles[28],
-  },
-  {
-    category: 'Landscape',
-    title: 'Landscape Development Project',
-    location: 'Addis Ababa',
-    year: '2024',
-    service: 'Landscape + Construction',
-    image: imageFiles[29],
-  },
-  {
-    category: 'Landscape',
-    title: 'Sports Ground Project',
-    location: 'Addis Ababa',
-    year: '2024',
-    service: 'Landscape + Construction',
-    image: imageFiles[30],
-  },
-  {
-    category: 'Portfolio',
-    title: 'Bright BOX Project 32',
-    location: 'Addis Ababa',
-    year: '2024',
-    service: 'Interior Design',
-    image: imageFiles[31],
   },
 ];
 
